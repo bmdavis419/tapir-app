@@ -7,3 +7,9 @@ tasks:
   docs:
     cmds:
       - swag init --dir ./cmd/http,./internal/todo
+  build:
+    cmds:
+      - go build -o http-server cmd/http/main.go
+  start:
+    cmds:
+      - ./http-server

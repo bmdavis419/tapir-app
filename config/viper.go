@@ -2,6 +2,7 @@ package config
 
 import (
 	"errors"
+	"os"
 
 	"github.com/spf13/viper"
 )
@@ -13,6 +14,15 @@ type EnvVars struct {
 }
 
 func LoadConfig() (config EnvVars, err error) {
+	env := os.Getenv("GO_ENV")
+	if env == "production" {
+		return EnvVars{
+			MONGODB_URI:  os.Getenv("MONGODB_URI"),
+			MONGODB_NAME: os.Getenv("MONGODB_NAME"),
+			PORT:         os.Getenv("PORT"),
+		}, nil
+	}
+
 	viper.AddConfigPath(".")
 	viper.SetConfigName("app")
 	viper.SetConfigType("env")
