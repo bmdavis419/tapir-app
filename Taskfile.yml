@@ -13,3 +13,7 @@ tasks:
   start:
     cmds:
       - ./http-server
+  install:
+    cmds:
+      - go install github.com/swaggo/swag/cmd/swag@latest
+      - go install github.com/go-task/task/v3/cmd/task@latest
