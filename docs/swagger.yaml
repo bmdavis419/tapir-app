@@ -1,0 +1,73 @@
+basePath: /
+definitions:
+  todo.createTodoRequest:
+    properties:
+      description:
+        type: string
+      title:
+        type: string
+    type: object
+  todo.createTodoResponse:
+    properties:
+      id:
+        type: string
+    type: object
+  todo.todoDB:
+    properties:
+      completed:
+        type: boolean
+      description:
+        type: string
+      id:
+        type: string
+      title:
+        type: string
+    type: object
+info:
+  contact:
+    name: Ben Davis
+  description: An example template of a Golang backend API using Fiber and MongoDB
+  license:
+    name: MIT
+  title: Tapir App Template
+  version: "2.0"
+paths:
+  /todos:
+    get:
+      consumes:
+      - '*/*'
+      description: fetch every todo available.
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/todo.todoDB'
+            type: array
+      summary: Get all todos.
+      tags:
+      - todos
+    post:
+      consumes:
+      - '*/*'
+      description: creates one todo.
+      parameters:
+      - description: Todo to create
+        in: body
+        name: todo
+        required: true
+        schema:
+          $ref: '#/definitions/todo.createTodoRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/todo.createTodoResponse'
+      summary: Create one todo.
+      tags:
+      - todos
+swagger: "2.0"

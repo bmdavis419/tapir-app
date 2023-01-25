@@ -6,14 +6,22 @@ import (
 	"time"
 
 	"github.com/bmdavis419/tapir-app/config"
+	_ "github.com/bmdavis419/tapir-app/docs"
 	"github.com/bmdavis419/tapir-app/internal/storage"
 	"github.com/bmdavis419/tapir-app/internal/todo"
 	"github.com/bmdavis419/tapir-app/pkg/shutdown"
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/cors"
 	"github.com/gofiber/fiber/v2/middleware/logger"
+	"github.com/gofiber/swagger"
 )
 
+// @title Tapir App Template
+// @version 2.0
+// @description An example template of a Golang backend API using Fiber and MongoDB
+// @contact.name Ben Davis
+// @license.name MIT
+// @BasePath /
 func main() {
 	// setup exit code for graceful shutdown
 	var exitCode int
@@ -80,6 +88,9 @@ func buildServer(env config.EnvVars) (*fiber.App, func(), error) {
 	app.Get("/health", func(c *fiber.Ctx) error {
 		return c.SendString("Healthy!")
 	})
+
+	// add docs
+	app.Get("/swagger/*", swagger.HandlerDefault)
 
 	// create the user domain
 	todoStore := todo.NewTodoStorage(db)

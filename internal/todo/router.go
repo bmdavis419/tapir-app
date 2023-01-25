@@ -9,4 +9,5 @@ func AddTodoRoutes(app *fiber.App, controller *TodoController) {
 
 	// add routes here
 	todos.Post("/", controller.create)
+	todos.Get("/", controller.getAll)
 }

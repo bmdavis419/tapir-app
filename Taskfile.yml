@@ -4,3 +4,6 @@ tasks:
   dev:
     cmds:
       - air
+  docs:
+    cmds:
+      - swag init --dir ./cmd/http,./internal/todo
