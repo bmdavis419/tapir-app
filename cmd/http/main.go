@@ -60,7 +60,7 @@ func run(env config.EnvVars) (func(), error) {
 
 	// start the server
 	go func() {
-		app.Listen(":" + env.PORT)
+		app.Listen("0.0.0.0:" + env.PORT)
 	}()
 
 	// return a function to close the server and database
