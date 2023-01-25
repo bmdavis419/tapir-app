@@ -46,7 +46,7 @@ func (s *TodoStorage) getAllTodos(ctx context.Context) ([]todoDB, error) {
 		return nil, err
 	}
 
-	var todos []todoDB
+	todos := make([]todoDB, 0)
 	if err = cursor.All(ctx, &todos); err != nil {
 		return nil, err
 	}
